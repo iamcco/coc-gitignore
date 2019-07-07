@@ -1,7 +1,12 @@
 {
   "name": "coc-gitignore",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "gitignore extension for coc.nvim",
+  "keywords": [
+    "coc.nvim",
+    "git",
+    "gitignore"
+  ],
   "main": "./out/index.js",
   "repository": "git@github.com:iamcco/coc-gitignore.git",
   "author": "iamcco <ooiss@qq.com>",
@@ -30,6 +35,7 @@
     "update_templates": "rm -rf ./templates && git clone https://github.com/dvcs/gitignore && mv ./gitignore/templates ./ && rm -rf gitignore"
   },
   "devDependencies": {
+    "@types/node": "^12.0.12",
     "coc.nvim": "^0.0.67",
     "typescript": "^3.4.5"
   }
