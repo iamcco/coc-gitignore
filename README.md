@@ -28,6 +28,22 @@ coc-settings.json
   "type": "boolean",
   "default": true,
   "description": "Is enable gitignore"
+},
+"gitignore.templates.patch": {
+  "type": "object",
+  "default": {},
+  "additionalProperties": {
+    "type": "string"
+  },
+  "description": "gitignore patch for exists templates (key and value format)"
+},
+"gitignore.templates.replace": {
+  "type": "object",
+  "default": {},
+  "additionalProperties": {
+    "type": "string"
+  },
+  "description": "gitignore completely replace the exists templates (key and value format)"
 }
 ```
 

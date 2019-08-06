@@ -18,6 +18,9 @@ export default class Gitignore implements IList {
   private isInit: boolean = false
 
   constructor(private templatesPath: string) {
+    const config = workspace.getConfiguration('gitignore')
+    const patch = config.get<Record<string, string>>('templates.patch', {})
+    const replace = config.get<Record<string, string>>('templates.replace', {})
     this.actions.push({
       name: 'append',
       execute: async item => {
@@ -26,15 +29,22 @@ export default class Gitignore implements IList {
         let gitignore = `# create by https://github.com/iamcco/coc-gitignore (${new Date().toString()})`
         list.forEach(item => {
           const typeName = item.filterText as string
-          const data = this.templateMap.get(typeName)
-          if (data) {
-            data.forEach(name => {
-              gitignore += `\n# ${name}:`
-              const filePath = join(templatesPath, name)
-              if (existsSync(filePath)) {
-                gitignore += `\n${readFileSync(filePath).toString()}`
-              }
-            })
+          if (replace[typeName]) {
+            gitignore += `\n# ${typeName}-replace:\n${replace[typeName]}`
+          } else {
+            const data =  this.templateMap.get(typeName)
+            if (data) {
+              data.forEach(name => {
+                gitignore += `\n# ${name}:`
+                const filePath = join(templatesPath, name)
+                if (existsSync(filePath)) {
+                  gitignore += `\n${readFileSync(filePath).toString()}`
+                }
+              })
+            }
+          }
+          if (patch[typeName]) {
+            gitignore += `\n# ${typeName}-patch:\n${patch[typeName]}`
           }
         })
         const targetPath = join(workdir, '.gitignore')

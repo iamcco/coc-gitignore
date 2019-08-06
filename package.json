@@ -1,6 +1,6 @@
 {
   "name": "coc-gitignore",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "gitignore extension for coc.nvim",
   "keywords": [
     "coc.nvim",
@@ -20,12 +20,29 @@
   ],
   "contributes": {
     "configuration": {
+      "title": "gitignore",
       "type": "object",
       "properties": {
         "gitignore.enable": {
           "type": "boolean",
           "default": true,
           "description": "Is enable gitignore"
+        },
+        "gitignore.templates.patch": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "gitignore patch for exists templates (key and value format)"
+        },
+        "gitignore.templates.replace": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "gitignore completely replace the exists templates (key and value format)"
         }
       }
     }
